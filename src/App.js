@@ -6,8 +6,10 @@ import { Reducer } from "./stateManagement/Reducer";
 import { Route } from "react-router-dom";
 import CreateTeam from "./Components/CreateTeam";
 import Store from "./Store";
-import FirstQuarter from "./Components/FirstQuarter2";
+import FirstQuarter from "./Components/FirstQuarter6";
 import Styled from 'styled-components';
+import Loader from './Components/Loader';
+import { useEffect } from "react";
 
 
 const MainStyled = Styled.div`
@@ -25,7 +27,17 @@ h1{
 
 
 function App() {
+
+  const [isLoaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setLoaded(true)
+  }, [])
+
+ 
+
   return (
+    isLoaded === false ? <Loader/> : 
     <Store>
       <Nav />
       <div className="App">

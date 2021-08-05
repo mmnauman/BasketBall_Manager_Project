@@ -152,10 +152,12 @@ function closeHandler(){
   
   function SelectHandler1(evnt) {
     if (!selectedStates.includes(evnt)) {
+      evnt.disabled = true;
       selectedStates.push(evnt);
-      console.log("hahaha");
+      console.log(evnt);
     } else {
       console.log("error");
+      evnt.disabled = false;
       setErrorContent(`You Have Already Selected This Position ${evnt.position}. You Cannot Select Same Position Again `)
       setShowError(true);
     }
@@ -167,9 +169,11 @@ function closeHandler(){
 
   function SelectHandler2(evnt) {
     if (!selectedStates.includes(evnt)) {
+      evnt.disabled = true;
       selectedStates.push(evnt);
       setState2(`${evnt.firstName} ${evnt.lastName}`);
     } else {
+      evnt.disabled = false;
       console.log("error");
       setErrorContent(`You Have Already Selected This Position ${evnt.position}. You Cannot Select Same Position Again `)
       setShowError(true)
@@ -180,8 +184,10 @@ function closeHandler(){
   function SelectHandler3(evnt) {
     if (!selectedStates.includes(evnt)) {
       selectedStates.push(evnt);
+      evnt.disabled = true;
       //setState3(`${evnt.firstName} ${evnt.lastName}`);
     } else {
+      evnt.disabled = false;
       console.log("error");
       setErrorContent(`You Have Already Selected This Position ${evnt.position}. You Cannot Select Same Position Again `)
       setShowError(true)
@@ -192,8 +198,10 @@ function closeHandler(){
   function SelectHandler4(evnt) {
     if (!selectedStates.includes(evnt)) {
       selectedStates.push(evnt);
+      evnt.disabled = true;
       //setState4(`${evnt.firstName} ${evnt.lastName}`);
     } else {
+      evnt.disabled = false;
       console.log("error");
       setErrorContent(`You Have Already Selected This Position ${evnt.position}. You Cannot Select Same Position Again `)
       setShowError(true)
@@ -203,9 +211,11 @@ function closeHandler(){
 
   function SelectHandler5(evnt) {
     if (!selectedStates.includes(evnt)) {
+      evnt.disabled = true;
       selectedStates.push(evnt);
       //setState5(`${evnt.firstName} ${evnt.lastName}`);
     } else {
+      evnt.disabled = false;
       console.log("error");
       setErrorContent(`You Have Already Selected This Position ${evnt.position}. You Cannot Select Same Position Again `)
       setShowError(true)
@@ -242,19 +252,20 @@ function closeHandler(){
         <div className="PlayerPosition">
           <Select
             className="selectBox"
-            options={
-              selectedStates.length > 0
-                ? team1.filter((el, i) => {
-                  console.log(el === selectedStates[i]);
-                    return el !== selectedStates[i];
-                  })
-                : team1.slice(0,5)
-            }
+            // options={
+            //   selectedStates.length > 0
+            //     ? [...new Set(team1.filter((el, i) => {
+            //         return el !== selectedStates[i];
+            //       }))]
+            //     : team1.slice(0,5)
+            // }
+            options={team1}
             onChange={SelectHandler1}
             getOptionLabel={(opt) => {
               return `${opt.position}`;
             }}
             getOptionValue={(opt) => opt.id}
+            isOptionDisabled={(option) => option.disabled}
           />
         </div>
       </div>
@@ -280,13 +291,15 @@ function closeHandler(){
         <div className="PlayerPosition">
           <Select
             className="selectBox"
-            options={
-              selectedStates.length > 0
-                ? team1.filter((el, i) => {
-                    return el !== selectedStates[i];
-                  })
-                : team1.slice(0,5)
-            }
+            // options={
+            //   selectedStates.length > 0
+            //     ? [...new Set(team1.filter((el, i) => {
+            //         return el !== selectedStates[i];
+            //       }))]
+            //     : team1.slice(0,5)
+            // }
+            options={team1}
+            isOptionDisabled={(option) => option.disabled}
             onChange={SelectHandler2}
             getOptionLabel={(opt) => {
               return `${opt.position}`;
@@ -317,13 +330,15 @@ function closeHandler(){
         <div className="PlayerPosition">
           <Select
             className="selectBox"
-            options={
-              selectedStates.length > 0
-                ? team1.filter((el, i) => {
-                    return el !== selectedStates[i];
-                  })
-                : team1.slice(0,5)
-            }
+            // options={
+            //   selectedStates.length > 0
+            //     ? [...new Set(team1.filter((el, i) => {
+            //         return el !== selectedStates[i];
+            //       }))]
+            //     : team1.slice(0,5)
+            // }
+            options={team1}
+            isOptionDisabled={(option) => option.disabled}
             onChange={SelectHandler3}
             getOptionLabel={(opt) => {
               return `${opt.position}`;
@@ -337,11 +352,12 @@ function closeHandler(){
         <div className="PlayerName">
           <Select
             className="selectBox"
-            options={
-              states.length > 0
-                ? team.filter((el, i) => el !== states[i])
-                : team
-            }
+            // options={
+            //   states.length > 0
+            //     ? team.filter((el, i) => el !== states[i])
+            //     : team
+            // }
+            isOptionDisabled={(option) => option.disabled}
             onChange={changeHandler4}
             getOptionLabel={(opt) => {
               return `${opt.firstName} ${opt.lastName}`;
@@ -354,13 +370,15 @@ function closeHandler(){
         <div className="PlayerPosition">
           <Select
             className="selectBox"
-            options={
-              selectedStates.length > 0
-                ? team1.filter((el, i) => {
-                    return el !== selectedStates[i];
-                  })
-                : team1.slice(0,5)
-            }
+            // options={
+            //   selectedStates.length > 0
+            //     ? [...new Set(team1.filter((el, i) => {
+            //         return el !== selectedStates[i];
+            //       }))]
+            //     : team1.slice(0,5)
+            // }
+            options={team1}
+            isOptionDisabled={(option) => option.disabled}
             onChange={SelectHandler4}
             getOptionLabel={(opt) => {
               return `${opt.position}`;
@@ -391,13 +409,15 @@ function closeHandler(){
         <div className="PlayerPosition">
           <Select
             className="selectBox"
-            options={
-              selectedStates.length > 0
-                ? [...new Set(team1.filter((el, i) => {
-                    return el !== selectedStates[i];
-                  }))]
-                : team1.slice(0,5)
-            }
+            // options={
+            //   selectedStates.length > 0
+            //     ? [...new Set(team1.filter((el, i) => {
+            //         return el !== selectedStates[i];
+            //       }))]
+            //     : team1.slice(0,5)
+            // }
+            options={team1}
+            isOptionDisabled={(option) => option.disabled}
             onChange={SelectHandler5}
             getOptionLabel={(opt) => {
               return `${opt.position}`;

@@ -4,6 +4,7 @@ export const Reducer = (
 ) => {
   switch (type) {
     case "ADD_PLAYER":
+      console.log("hello");
       let Same = state.team.find(
         (player) => player.firstName === payload.firstName
       );

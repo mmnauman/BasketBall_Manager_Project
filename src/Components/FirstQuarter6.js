@@ -16,10 +16,6 @@ box-shadow: 0px 0px 5px 2px #000;
 display: grid;
 align-content: center;
 
-body{
-  back
-}
-
 .select{
     display: flex;
     width: 100%;
@@ -152,10 +148,12 @@ function closeHandler(){
   
   function SelectHandler1(evnt) {
     if (!selectedStates.includes(evnt)) {
+      evnt.disabled = true;
       selectedStates.push(evnt);
-      console.log("hahaha");
+      console.log(evnt);
     } else {
       console.log("error");
+      evnt.disabled = false;
       setErrorContent(`You Have Already Selected This Position ${evnt.position}. You Cannot Select Same Position Again `)
       setShowError(true);
     }
@@ -244,10 +242,9 @@ function closeHandler(){
             className="selectBox"
             options={
               selectedStates.length > 0
-                ? team1.filter((el, i) => {
-                  console.log(el === selectedStates[i]);
+                ? [...new Set(team1.filter((el, i) => {
                     return el !== selectedStates[i];
-                  })
+                  }))]
                 : team1.slice(0,5)
             }
             onChange={SelectHandler1}
@@ -282,9 +279,9 @@ function closeHandler(){
             className="selectBox"
             options={
               selectedStates.length > 0
-                ? team1.filter((el, i) => {
+                ? [...new Set(team1.filter((el, i) => {
                     return el !== selectedStates[i];
-                  })
+                  }))]
                 : team1.slice(0,5)
             }
             onChange={SelectHandler2}
@@ -319,9 +316,9 @@ function closeHandler(){
             className="selectBox"
             options={
               selectedStates.length > 0
-                ? team1.filter((el, i) => {
+                ? [...new Set(team1.filter((el, i) => {
                     return el !== selectedStates[i];
-                  })
+                  }))]
                 : team1.slice(0,5)
             }
             onChange={SelectHandler3}
@@ -356,9 +353,9 @@ function closeHandler(){
             className="selectBox"
             options={
               selectedStates.length > 0
-                ? team1.filter((el, i) => {
+                ? [...new Set(team1.filter((el, i) => {
                     return el !== selectedStates[i];
-                  })
+                  }))]
                 : team1.slice(0,5)
             }
             onChange={SelectHandler4}

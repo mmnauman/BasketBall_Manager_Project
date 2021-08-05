@@ -1,9 +1,10 @@
-import React, { useReducer, useRef, useContext } from "react";
+import React, { useReducer, useRef, useContext, useState, useEffect } from "react";
 import { Reducer } from "../stateManagement/Reducer";
 import { Context } from "./../Store";
 import Styled from 'styled-components';
 import {Form, Row, Button} from 'react-bootstrap';
 import img from './BG2.jpg';
+import Loader from "./Loader";
 
 
 const MainWrapper = Styled.div`
@@ -12,7 +13,8 @@ font-family: 'Graduate', cursive;
 
 body{
   background-image: url(${img})!important;
-}
+}import Loader from './Loader';
+
 
 
 
@@ -82,6 +84,11 @@ label{
 function CreateTeam() {
   const [state, dispatch] = useContext(Context);
   // const [state, dispatch] = useReducer(Reducer, {team:[]});
+  const [isLoaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setLoaded(true)
+  }, [])
 
   const fname = useRef();
   const lname = useRef();
@@ -111,9 +118,12 @@ function CreateTeam() {
   }
 
   return ( 
+
+    isLoaded === false ? <Loader/> : 
+
     <MainWrapper>
       <h1>CREATE A PLAYER</h1>
-      <Form onSubmit={(e) => AddPlayerHandler(e)} action="">
+      <Form onSubmit={(e) => AddPlayerHandler(e)}>
         <Row>
         <Form.Group className="formGroup" controlId="formGroupEmail">
           <Form.Label htmlFor="fName">First Name</Form.Label>
@@ -162,7 +172,7 @@ function CreateTeam() {
         </div>
         <input ref={id} type="hidden" id={state.team.length + 1} />
         <div className="d-grid gap-2">
-        <Button size="lg" className='mt-3' variant="dark">CREATE PLAYER</Button>
+        <Button type='submit' size="lg" className='mt-3' variant="dark">CREATE PLAYER</Button>
         </div>
       </Form>
     </MainWrapper>

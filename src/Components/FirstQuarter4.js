@@ -1,15 +1,12 @@
-import React, { useContext, useState, useCallback, useEffect } from "react";
+import React, { useContext, useState, useCallback } from "react";
 import { Context } from "./../Store";
 import Styled from "styled-components";
 import Select from "react-select";
 import ErrorComp from "./Error";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Loader from "./Loader";
-import { Button } from 'react-bootstrap';
-import { useMemo } from "react";
 
 const TeamsContainerStyled = Styled.div`
-font-family: 'Graduate', cursive;
+
 width: 1000px;
 margin: 40px auto;
 box-shadow: 0px 0px 5px 2px #000;
@@ -52,33 +49,20 @@ body{
 `;
 
 const states = [];
-const selectedStates = [];
 function FirstQuarter() {
   const [state, dispatch] = useContext(Context);
   const [team, setTeam] = useState(state.team);
-  const [team1, setTeam1] = useState(state.team);
   const [state1, setState1] = useState("");
   const [state2, setState2] = useState("");
-  const [ErrorContent, setErrorContent] = useState("");
   const [ShowError, setShowError] = useState(false);
-  const [isLoaded, setLoaded] = useState(false);
-  const [showSubmitBtn, setSubmitBtn] = useState(false);
+
 
   const [state3, setState3] = useState("");
   const [state4, setState4] = useState("");
   const [state5, setState5] = useState("");
 
-
-  useEffect(() => {
-    setLoaded(true);
-    console.log(states.length)
-    console.log(selectedStates.length)
-    states.length === 5 && selectedStates.length === 5 ? setSubmitBtn(true) : setSubmitBtn(false);
-  }, [changeHandler1, changeHandler2, changeHandler3, changeHandler4, changeHandler5, SelectHandler1, SelectHandler2, SelectHandler3, SelectHandler4, SelectHandler5])
-
-
-
   console.log(team, state1, state2);
+
 
 function closeHandler(){
   setShowError(false)
@@ -90,10 +74,7 @@ function closeHandler(){
       states.push(evnt);
       console.log("hahaha");
     } else {
-      console.log("error");
-      setErrorContent(` You have already selected this Player ${evnt.firstName} ${evnt.lastName}. You cannot select same player Again `)
-      setShowError(true);
-    }
+      console.log("error"); 
     console.log(evnt);
 
     setState1(`${evnt.firstName} ${evnt.lastName}`);
@@ -106,7 +87,6 @@ function closeHandler(){
       setState2(`${evnt.firstName} ${evnt.lastName}`);
     } else {
       console.log("error");
-      setErrorContent(` You have already selected this Player ${evnt.firstName} ${evnt.lastName}. You cannot select same player Again `)
       setShowError(true)
     }
     console.log(evnt);
@@ -118,7 +98,6 @@ function closeHandler(){
       setState3(`${evnt.firstName} ${evnt.lastName}`);
     } else {
       console.log("error");
-      setErrorContent(` You have already selected this Player ${evnt.firstName} ${evnt.lastName}. You cannot select same player Again `)
       setShowError(true)
     }
     console.log(evnt);
@@ -130,7 +109,6 @@ function closeHandler(){
       setState4(`${evnt.firstName} ${evnt.lastName}`);
     } else {
       console.log("error");
-      setErrorContent(` You have already selected this Player ${evnt.firstName} ${evnt.lastName}. You cannot select same player Again `)
       setShowError(true)
     }
     console.log(evnt);
@@ -142,81 +120,12 @@ function closeHandler(){
       setState5(`${evnt.firstName} ${evnt.lastName}`);
     } else {
       console.log("error");
-      setErrorContent(` You have already selected this Player${evnt.firstName} ${evnt.lastName}. You cannot select same player Again `)
-      setShowError(true)
-    }
-    console.log(evnt);
-  }
-
-  // End Change Start Select
-  
-  function SelectHandler1(evnt) {
-    if (!selectedStates.includes(evnt)) {
-      selectedStates.push(evnt);
-      console.log("hahaha");
-    } else {
-      console.log("error");
-      setErrorContent(`You Have Already Selected This Position ${evnt.position}. You Cannot Select Same Position Again `)
-      setShowError(true);
-    }
-    console.log(evnt);
-
-    // setState1(`${evnt.firstName} ${evnt.lastName}`);
-    // console.log(states);
-  }
-
-  function SelectHandler2(evnt) {
-    if (!selectedStates.includes(evnt)) {
-      selectedStates.push(evnt);
-      setState2(`${evnt.firstName} ${evnt.lastName}`);
-    } else {
-      console.log("error");
-      setErrorContent(`You Have Already Selected This Position ${evnt.position}. You Cannot Select Same Position Again `)
-      setShowError(true)
-    }
-    console.log(evnt);
-  }
-
-  function SelectHandler3(evnt) {
-    if (!selectedStates.includes(evnt)) {
-      selectedStates.push(evnt);
-      //setState3(`${evnt.firstName} ${evnt.lastName}`);
-    } else {
-      console.log("error");
-      setErrorContent(`You Have Already Selected This Position ${evnt.position}. You Cannot Select Same Position Again `)
-      setShowError(true)
-    }
-    console.log(evnt);
-  }
-
-  function SelectHandler4(evnt) {
-    if (!selectedStates.includes(evnt)) {
-      selectedStates.push(evnt);
-      //setState4(`${evnt.firstName} ${evnt.lastName}`);
-    } else {
-      console.log("error");
-      setErrorContent(`You Have Already Selected This Position ${evnt.position}. You Cannot Select Same Position Again `)
-      setShowError(true)
-    }
-    console.log(evnt);
-  }
-
-  function SelectHandler5(evnt) {
-    if (!selectedStates.includes(evnt)) {
-      selectedStates.push(evnt);
-      //setState5(`${evnt.firstName} ${evnt.lastName}`);
-    } else {
-      console.log("error");
-      setErrorContent(`You Have Already Selected This Position ${evnt.position}. You Cannot Select Same Position Again `)
       setShowError(true)
     }
     console.log(evnt);
   }
 
   return (
-
-    isLoaded === false ? <Loader/> : 
-
     <TeamsContainerStyled>
 
 <h1 className='SelectHeading'>Select 5 Players To Play in Quarter's & Assign A Role</h1>
@@ -235,7 +144,7 @@ function closeHandler(){
               return `${opt.firstName} ${opt.lastName}`;
             }}
             getOptionValue={(opt) => opt.id}
-            // getOptionSelected={state1}
+            //getOptionSelected={state1}
           />
         </div>
 
@@ -243,12 +152,12 @@ function closeHandler(){
           <Select
             className="selectBox"
             options={
-              selectedStates.length > 0
-                ? team1.filter((el, i) => {
-                  console.log(el === selectedStates[i]);
-                    return el !== selectedStates[i];
+              states.length > 0
+                ? team.filter((el, i) => {
+                    console.log(el, states[i]);
+                    return el.id !== states[i];
                   })
-                : team1.slice(0,5)
+                : team
             }
             onChange={SelectHandler1}
             getOptionLabel={(opt) => {
@@ -280,13 +189,7 @@ function closeHandler(){
         <div className="PlayerPosition">
           <Select
             className="selectBox"
-            options={
-              selectedStates.length > 0
-                ? team1.filter((el, i) => {
-                    return el !== selectedStates[i];
-                  })
-                : team1.slice(0,5)
-            }
+            options={team}
             onChange={SelectHandler2}
             getOptionLabel={(opt) => {
               return `${opt.position}`;
@@ -317,13 +220,7 @@ function closeHandler(){
         <div className="PlayerPosition">
           <Select
             className="selectBox"
-            options={
-              selectedStates.length > 0
-                ? team1.filter((el, i) => {
-                    return el !== selectedStates[i];
-                  })
-                : team1.slice(0,5)
-            }
+            options={team}
             onChange={SelectHandler3}
             getOptionLabel={(opt) => {
               return `${opt.position}`;
@@ -354,13 +251,7 @@ function closeHandler(){
         <div className="PlayerPosition">
           <Select
             className="selectBox"
-            options={
-              selectedStates.length > 0
-                ? team1.filter((el, i) => {
-                    return el !== selectedStates[i];
-                  })
-                : team1.slice(0,5)
-            }
+            options={team}
             onChange={SelectHandler4}
             getOptionLabel={(opt) => {
               return `${opt.position}`;
@@ -392,11 +283,9 @@ function closeHandler(){
           <Select
             className="selectBox"
             options={
-              selectedStates.length > 0
-                ? [...new Set(team1.filter((el, i) => {
-                    return el !== selectedStates[i];
-                  }))]
-                : team1.slice(0,5)
+              states.length > 0
+                ? team.filter((el, i) => el !== states[i])
+                : team
             }
             onChange={SelectHandler5}
             getOptionLabel={(opt) => {
@@ -407,19 +296,12 @@ function closeHandler(){
         </div>
       </div>
 
-            {showSubmitBtn ? 
-      <Button variant='dark'>SAVE PLAYERS FOR QUARTERS</Button>  
-      : 
-      <Button disabled variant='dark'>SAVE PLAYERS FOR QUARTERS</Button>     }
-
       {/* {ShowError && <ErrorComp closeHandler={closeHandler}>You have already selected this Player. You cannot select same player Again</ErrorComp>} */}
      
       {
-      ShowError && <ErrorComp closeHandler={closeHandler}>{ErrorContent}</ErrorComp>}
+      ShowError && <ErrorComp closeHandler={closeHandler}>You have already selected this Player. You cannot select same player Again</ErrorComp>}
 
-      {/* You have already selected this Player. You cannot select same player Again */}
-
-    {ShowError && setTimeout(() => {setShowError(false)}, 4000)}
+    {ShowError && setTimeout(() => {setShowError(false)}, 3000)}
 
     </TeamsContainerStyled>
   );
