@@ -4,6 +4,8 @@ import Styled from 'styled-components'
 
 const NavStyled = Styled.nav`
 
+font-family: 'Graduate', cursive;
+
 .active{
     border-bottom: solid red;
     border-radius: 4px;
